@@ -1,0 +1,7 @@
+organization:
+  org_id: "222222"
+  billing_account: "44444-5555555-666666"
+  enable_lien: false
+  default_network_tier: "STANDARD" # PREMIUM | STANDARD
+  domain: ""
+

@@ -1,0 +1,14 @@
+org_policies:
+  iam.disableServiceAccountKeyCreation:
+    rules:
+      - enforce: true
+  iam.disableServiceAccountKeyUpload:
+    rules:
+      - enforce: true
+  iam.automaticIamGrantsForDefaultServiceAccounts:
+    rules:
+      - enforce: true
+  # iam.workloadIdentityPoolProviders:
+  #   rules:
+  #     - allow:
+  #       - "in:https://app.terraform.io"

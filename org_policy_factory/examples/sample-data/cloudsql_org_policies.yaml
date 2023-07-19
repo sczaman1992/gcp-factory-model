@@ -1,0 +1,7 @@
+org_policies:
+  sql.restrictPublicIp:
+    rules:
+      - enforce: true
+  sql.restrictAuthorizedNetworks:
+    rules:
+      - enforce: true

@@ -1,0 +1,28 @@
+workload_identity_provider_details:
+  project_id: "project-a"
+  workload_identity_pool_id: "example-pool"
+  workload_identity_provider:
+    tfc-provider:
+      description: "terraform cloud provider"
+      disabled: false
+      hostname: "https://app.terraform.io"
+      attribute_mapping:
+        google.subject: "assertion.sub"
+        attribute.aud: "assertion.aud"
+      attribute_condition: "assertion.sub.startsWith()"
+      allowed_audiences: ["https://allowed_audience"]
+      service_account_id: "service-account-tfc"
+      workload_pool_service_account_role: "roles/iam.workloadIdentityUser"
+      workload_pool_service_account_member: "attribute.terraform_workspace_name/test-terraform-workspace"
+    github-provider:
+      description: "terraform cloud provider"
+      disabled: false
+      hostname: "https://github.com/"
+      attribute_mapping:
+        google.subject: "assertion.sub"
+        attribute.aud: "assertion.aud"
+      attribute_condition: "assertion.sub.startsWith()"
+      allowed_audiences: ["https://allowed_audience"]
+      service_account_id: "service-account-github"
+      workload_pool_service_account_role: "roles/iam.workloadIdentityUser"
+      workload_pool_service_account_member: "attribute.repository/username/reponame"

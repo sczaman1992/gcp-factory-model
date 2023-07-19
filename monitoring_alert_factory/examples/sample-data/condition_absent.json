@@ -1,0 +1,70 @@
+{
+    "displayName": "absent-test",
+    "documentation": {
+      "content": "hello",
+      "mimeType": "text/markdown"
+    },
+    "userLabels": {
+      "faf": "aedadf"
+    },
+    "conditions": [
+      {
+        "displayName": "VM Instance - CPU utilization",
+        "conditionAbsent": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "aggregations": [
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_NONE",
+              "perSeriesAligner": "ALIGN_MEAN"
+            }
+          ],
+          "duration": "300s",
+          "trigger": {
+            "count": 1
+          }
+        }
+      },
+      {
+        "displayName": "VM Instance - CPU utilization- absence",
+        "conditionAbsent": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "aggregations": [
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_NONE",
+              "perSeriesAligner": "ALIGN_MEAN"
+            },
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_COUNT",
+              "groupByFields": [
+                "metric.label.instance_name"
+              ],
+              "perSeriesAligner": "ALIGN_NEXT_OLDER"
+            }
+          ],
+          "duration": "900s",
+          "trigger": {
+            "percent": 100
+          }
+        }
+      }
+    ],
+    "alertStrategy": {
+      "autoClose": "604800s",
+      "notificationRateLimit": {
+        "period": "20s"
+      },
+      "notificationChannelStrategy": [
+        {
+          "notificationChannelNames": ["projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]"],
+          "renotifyInterval": "20s"
+        }
+      ]
+    },
+    "combiner": "OR",
+    "enabled": true,
+    "project": "poc-and-training",
+    "notificationChannels": ["test1","test2"]
+  }

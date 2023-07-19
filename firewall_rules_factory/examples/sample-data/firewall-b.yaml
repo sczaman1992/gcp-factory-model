@@ -1,0 +1,43 @@
+firewall_rule:
+  project_id: "test-project-b"
+  network: "dev-amber-vpc"
+  custom_rules:
+    dev-amber-vpc-fr-gcp-ingress-deny-onprem-gcp:
+      description: "ingress onprem to gcp"
+      direction: "INGRESS"
+      action: "deny"
+      target_tags:
+        - "test-targets"
+      source_tags:
+        - "test-source"
+      destination_ranges:
+        - "172.0.0.0"
+      rules:
+        - protocol: "tcp"
+          ports: ["22","443"] 
+        - protocol: "udp"
+          ports: ["53","889"]   
+      extra_attributes:
+        priority: 2000
+        disabled: false    
+    dev-amber-vpc-fr-gcp-egress-allow-gcp-onprem:
+      description: "egress gcp to onprem"
+      direction: "EGRESS"
+      action: "allow"
+      target_tags:
+        - "test-targets"
+      destination_ranges:
+        - "192.0.0.0"
+        - "188.0.0.0"
+      source_ranges:
+        - "192.1.0.0"
+      rules:
+        - protocol: "tcp"
+          ports: ["22","443"] 
+        - protocol: "udp"
+          ports: ["53","889"]   
+      extra_attributes:
+        priority: 1000
+        disabled: false
+    
+    

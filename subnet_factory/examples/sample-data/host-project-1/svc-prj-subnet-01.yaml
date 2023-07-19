@@ -1,0 +1,31 @@
+subnet_details:
+  service_project_id: "svc-prj-subnet-01"
+  host_project_id: "example-host-vpc"
+  network_name: "example-vpc"
+  subnets:
+    subnet-01a:
+      # name: "subnet-01a"
+      description: "simple subnet test"
+      ip_cidr_range: "10.10.10.0/24"
+      region: "us-west1"
+      # private_ip_google_access: "true"
+      flow_logs_enable: "true"
+      role: "ACTIVE"
+      secondary_ip_range:
+        - range_name: "subnet-01-secondary-01a"
+          ip_cidr_range: "192.168.64.0/24"
+        - range_name: "subnet-02-secondary-01a"
+          ip_cidr_range: "192.168.65.0/24"
+    subnet-01b:
+      # name: "subnet-01b"
+      description: "simple subnet test2"
+      ip_cidr_range: "10.10.10.0/24"
+      region: "us-west1"
+      # private_ip_google_access: "true"
+      flow_logs_enable: "true"
+      role: "ACTIVE"
+      secondary_ip_range:
+        - range_name: "subnet-01-secondary-01b"
+          ip_cidr_range: "192.168.64.0/24"
+        - range_name: "subnet-02-secondary-01b"
+          ip_cidr_range: "192.168.65.0/24"

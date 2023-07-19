@@ -1,0 +1,40 @@
+{
+    "displayName": "query-test",
+    "documentation": {
+      "content": "hello",
+      "mimeType": "text/markdown"
+    },
+    "userLabels": {
+      "faf": "aedadf"
+    },
+    "conditions": [
+      {
+        "displayName": "New condition",
+        "conditionMonitoringQueryLanguage": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "duration": "0s",
+          "trigger": {
+            "count": 1
+          },
+          "query": "fetch gce_instance::compute.googleapis.com/instance/cpu/utilization\n| {\n    top 3 | value [is_default_value: false()]\n  ;\n    ident\n  }\n| outer_join true(), _\n| filter is_default_value\n| value drop [is_default_value]",
+          "evaluationMissingData": "EVALUATION_MISSING_DATA_NO_OP"  
+        }
+      }
+    ],
+    "alertStrategy": {
+      "autoClose": "604800s",
+      "notificationRateLimit": {
+        "period": "20s"
+      },
+      "notificationChannelStrategy": [
+        {
+          "notificationChannelNames": ["projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]"],
+          "renotifyInterval": "20s"
+        }
+      ]
+    },
+    "combiner": "OR",
+    "enabled": true,
+    "project": "poc-and-training",
+    "notificationChannels": ["test1","test2"]
+  }

@@ -1,0 +1,26 @@
+route_details:
+  project_id: "host-prj-01"
+  network: "example-vpc"
+  routes:
+    route-01a:
+      description: "descriptio route-01a"
+      tags: ["tag-a", "tag-b"]
+      dest_range: "10.10.0.0/24"
+      next_hop_gateway: "Interrnet Gateway"
+      # next_hop_ip: "0.0.0.0/0"
+      # next_hop_instance: "instance1"
+      next_hop_instance_zone: "us-west1"
+      # next_hop_vpn_tunnel: "vpn-897662"
+      # next_hop_ilb: "llb-77773"
+      priority: 10
+    route-02a:
+      description: "descriptio route-02a"
+      tags: ["tag-ba", "tag-bc"]
+      dest_range: "10.20.0.0/24"
+      # next_hop_gateway: "Interrnet Gateway"
+      next_hop_ip: "0.0.0.0/0"
+      # next_hop_instance: "instance1"
+      next_hop_instance_zone: "us-west1"
+      # next_hop_vpn_tunnel: "vpn-b897662"
+      # next_hop_ilb: "llb-b77773"
+      priority: 9

@@ -1,0 +1,41 @@
+org_policies:
+  compute.disableGuestAttributesAccess:
+    rules:
+      - enforce: true
+  compute.requireOsLogin:
+    rules:
+      - enforce: true
+  bigquery.disableBQOmniAzure:
+    rules:
+      - enforce: true
+  compute.skipDefaultNetworkCreation:
+    rules:
+      - enforce: true
+  compute.trustedImageProjects:
+    rules:
+      - allow:
+          values:
+            - "projects/fast-dev-iac-core-0"
+  compute.vmExternalIpAccess:
+    rules:
+      - deny:
+          all: true
+  compute.disableNestedVirtualization:
+    rules:
+      - enforce: true
+  compute.disableSerialPortAccess:
+    rules:
+      - enforce: true
+  compute.skipDefaultNetworkCreation:
+    rules:
+      - enforce: true
+  compute.restrictLoadBalancerCreationForTypes:
+    rules:
+        - allow:
+            values:
+              - "INTERNAL_TCP_UDP"
+              - "INTERNAL_HTTP_HTTPS"
+              - "REGIONAL_INTERNAL_MANAGED_TCP_PROXY"
+  compute.requireShieldedVm:
+    rules:
+      - enforce: true

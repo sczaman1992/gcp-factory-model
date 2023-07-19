@@ -1,0 +1,8 @@
+custom_roles:
+  OrgCustomRoleIam:
+    - "iam.roles.list"
+    - "iam.roles.create"
+    - "iam.roles.delete"
+  OrgCustomRoleResourceManager:
+    - "resourcemanager.projects.get"
+    - "resourcemanager.projects.getIamPolicy"

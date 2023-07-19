@@ -1,0 +1,5 @@
+monitoring_scope_details:
+  metrics_scope_project_id: "svc-prj-subnet-01"
+  monitored_projects:
+    my-monitored-project1:
+    my-monitored-project2:

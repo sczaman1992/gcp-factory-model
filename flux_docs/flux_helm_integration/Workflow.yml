@@ -1,0 +1,51 @@
+name: 'automated helm package creation'
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'flux-helm-demo-chart/Chart.yaml' 
+  pull_request:
+
+env:
+  export_default_credentials: true
+  ROOT_PATH: ${{github.workspace}}
+  
+jobs:
+  setup:
+    name: 'Setup helm '
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          repository: manjulalvmCG/flux-helm-repo-pvt
+          path: helm-repo
+          ref: main
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v2
+
+      - name: Package Helm Chart
+        run: |
+         ls -ltr
+         cd helm-repo
+         ls -ltr
+         helm package ./flux-helm-demo-chart
+         helm repo index .
+         ls -ltr
+         git config --global user.name "manjulalvmCG"
+         git config --global user.email "manjulal.vm@capgemini.com"
+         git pull
+         git add -A
+         git commit -m "Update Helm package and index"
+         git push
+         ls -ltr
+         
+

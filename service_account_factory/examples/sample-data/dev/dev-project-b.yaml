@@ -1,0 +1,10 @@
+service_account_details:
+  project_id: "dev-project-b"
+  service_accounts:
+    cloudsupport:
+      subnet_roles:
+        - "roles/compute.networkUser"    
+    dev-admin:
+      project_roles:
+        - roles/pubsub.admin
+        - roles/compute.admin

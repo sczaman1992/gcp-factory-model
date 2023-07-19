@@ -1,0 +1,38 @@
+{
+    "displayName": "match-log-test",
+    "documentation": {
+        "content": "hello",
+        "mimeType": "text/markdown"
+      },
+      "userLabels": {
+        "faf": "aedadf"
+      },
+    "conditions": [
+      {
+        "displayName": "New condition",
+        "conditionMatchedLog": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "labelExtractors": {
+            "dev": "dev",
+            "prod": "prod"
+          }
+        }
+      }
+    ],
+    "alertStrategy": {
+      "autoClose": "604800s",
+      "notificationRateLimit": {
+        "period": "20s"
+      },
+      "notificationChannelStrategy": [
+        {
+          "notificationChannelNames": ["projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]"],
+          "renotifyInterval": "20s"
+        }
+      ]
+    },
+      "combiner": "OR",
+      "enabled": true,
+      "project": "poc-and-training",
+      "notificationChannels": ["test1","test2"]
+  }

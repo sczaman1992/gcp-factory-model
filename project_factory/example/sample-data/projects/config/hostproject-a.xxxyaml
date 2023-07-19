@@ -1,0 +1,70 @@
+project_details:
+  name: "host-project-1"
+  domain_prefix: "host-project-1-domain"
+  folder_name: "dev-amber"
+  apis:
+    activate_apis:
+      - "compute.googleapis.com"
+      - "cloudkms.googleapis.com"
+    disable_services_on_destroy: true
+    disable_dependent_services: true
+  shared_vpc:
+    enable_shared_vpc_host_project: "true"
+    shared_vpc_network_name: "host-project-1-vpc"
+    shared_vpc_routing_mode: "REGIONAL"
+  vpc_peer:
+    enable_vpc_peer: true
+    vpc_peering_name: "host-service-vpc-peering"
+    peer_project_id: "shared-project"
+    peer_network: "shared-vpc"
+    import_custom_routes: false
+    export_custom_routes: false
+    import_subnet_routes_with_public_ip: false
+    export_subnet_routes_with_public_ip: false
+  essential_contacts:
+    user1@foo.com: ["ALL"]
+    user2@foo.com: ["SECURITY", "TECHNICAL"]
+service_account_details:
+  service_accounts:
+    host-project-sa:
+      project_roles:
+        - "roles/compute.networkAdmin"
+notification_channels_details:
+  notification_channels:
+    email_notification_channel:
+      type: "email"
+      labels:
+        email_address: "a1@abc.com"
+      enabled: true
+      description: "email_notification_channel"
+      user_labels:
+        key1: "value1"
+        key2: "value2"
+budget_details:
+  billing_account: "1111-1111-1111-1111"
+  budgets:
+    budget-svc-prj-subnet-01:
+      budget_filter:
+        credit_types_treatment: "INCLUDE_ALL_CREDITS"   #Possible values are INCLUDE_ALL_CREDITS or EXCLUDE_ALL_CREDITS
+        services: null
+        calendar_period: null # Exactly one calender_period or custom_period must be provided. Possible values are MONTH, QUARTER, YEAR, CALENDAR_PERIOD_UNSPECIFIED
+        custom_period: # Exactly one calender_period or custom_period must be provided.
+          start_date:
+            day: 01
+            month: 01
+            year: 2020
+          end_date:
+            day: 01
+            month: 01
+            year: 2022
+      amount:
+        specified_amount:
+          currency_code: "US"
+          currency_amount: 1000
+      threshold_rules:
+        alert_spent_percents: 0.5
+        alert_spend_basis: "CURRENT_SPEND" # possible values are FORECASTED_SPEND or CURRENT_SPEND
+      all_updates_rule:
+        alert_pubsub_topic: "test_pubsub_topic"
+        monitoring_notification_channels: []
+

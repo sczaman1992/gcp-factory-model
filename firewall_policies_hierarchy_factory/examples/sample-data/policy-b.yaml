@@ -1,0 +1,51 @@
+hierarchy_policy:  
+  policy_name: "anchor-firewall-policy"
+  parent: "desktop-anchor-folder"
+  policy_description: "org firewall policy"
+  association:
+    dev-genpop:
+      policy_association_target: "dev-genpop"
+    dev-red:
+      policy_association_target: "dev-red"
+  custom_rules:
+    anchorfp-allow-ingress-inbound:
+      policy_rule_description: "allow inbound"
+      policy_rule_priority: 1000
+      policy_rule_enable_logging: true
+      policy_rule_action: "allow"
+      policy_rule_direction: "INGRESS"
+      policy_rule_disabled: false
+      policy_rule_target_resources:
+      policy_rule_target_service_accounts:
+      match:
+        layer4_configs:
+          ip_protocol: "tcp"
+          ports: ["22","443"]
+        dest_ip_ranges:
+          - "192.0.0.0"
+          - "221.0.0.0"
+        src_ip_ranges:
+          - "122.0.0.0"
+          - "152.0.0.0"
+
+    anchorfp-deny-egress-outbound:
+      policy_rule_description: "rule-test-outbound"
+      policy_rule_priority: "2000"
+      policy_rule_enable_logging: true
+      policy_rule_action: "deny"
+      policy_rule_direction: "EGRESS"
+      policy_rule_disabled: false
+      policy_rule_target_resources:
+      policy_rule_target_service_accounts:
+      match:
+        layer4_configs:
+          ip_protocol: "udp"
+          ports: ["66","47"]
+        dest_ip_ranges:
+          - "122.0.0.0"
+          - "88.0.0.0"
+        src_ip_ranges:
+          - "143.0.0.0"
+          - "129.0.0.0"
+
+      

@@ -1,0 +1,4 @@
+org_policies:
+  bigquery.disableBQOmniAzure:
+    rules:
+      - enforce: true

@@ -1,0 +1,8 @@
+dashboard_details:
+  dashboards:
+    dashboard-name-01a:
+      json_config: "./sample-data/firewall_dropped_bytes.json"
+    dashboard-name-01b:
+      json_config: "./sample-data/gcs_object_count.json"
+
+

@@ -1,0 +1,7 @@
+org_policies:
+  essentialcontacts.allowedContactDomains:
+    rules:
+      - allow:
+          values:
+            - "@dev2.testgcplz.net"
+            - "@dev.testgcplz.net"

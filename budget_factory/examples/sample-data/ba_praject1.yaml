@@ -1,0 +1,45 @@
+budget_details:
+  service_project_id: "shared-infra-logging"
+  billing_account: "01C49A-22222-A19CC4"
+  budgets:
+    budget-svc-prj-subnet-01:
+      budget_filter:
+        credit_types_treatment: "INCLUDE_ALL_CREDITS"   #Possible values are INCLUDE_ALL_CREDITS or EXCLUDE_ALL_CREDITS
+        services: null
+        calendar_period: null # Exactly one calender_period or custom_period must be provided. Possible values are MONTH, QUARTER, YEAR, CALENDAR_PERIOD_UNSPECIFIED
+        custom_period: # Exactly one calender_period or custom_period must be provided.
+          start_date:
+            day: 01
+            month: 01
+            year: 2020
+          end_date:
+            day: 01
+            month: 01
+            year: 2022
+      amount:
+        specified_amount:
+          currency_code: "USD"
+          currency_amount: 1000
+      threshold_rules:
+        alert_spent_percents: 0.5
+        alert_spend_basis: "CURRENT_SPEND" # possible values are FORECASTED_SPEND or CURRENT_SPEND
+      all_updates_rule:
+        alert_pubsub_topic: "test_pubsub_topic"
+        monitoring_notification_channels: ["test_notification"]
+
+    budget-svc-prj-subnet-02:
+      budget_filter:
+        credit_types_treatment: "EXCLUDE_ALL_CREDITS"   #Possible values are INCLUDE_ALL_CREDITS or EXCLUDE_ALL_CREDITS
+        services: null
+        calendar_period: "QUARTER" # Exactly one calender_period or custom_period must be provided. Possible values are MONTH, QUARTER, YEAR, CALENDAR_PERIOD_UNSPECIFIED, CUSTOM
+        custom_period: null # Exactly one calender_period or custom_period must be provided.
+      amount:
+        specified_amount:
+          currency_code: "USD"
+          currency_amount: 500
+      threshold_rules:
+        alert_spent_percents: 0.5
+        alert_spend_basis: "FORECASTED_SPEND" # possible values are FORECASTED_SPEND or CURRENT_SPEND
+      all_updates_rule:
+        alert_pubsub_topic: "test_pubsub_topic2"
+        monitoring_notification_channels: ["test_notification2"]

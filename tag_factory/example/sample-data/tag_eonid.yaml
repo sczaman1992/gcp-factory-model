@@ -1,0 +1,12 @@
+tag:
+  tag_name: "Eonid"
+  parent: "organizations/43242342344475" #projects/project_id
+  tag_description: "eonid tags"
+  purpose: "GCE_FIREWALL"
+  purpose_data:
+    network: "bootstrap-wip-sa/default"
+  tag_value:
+    eonid_1: 
+      tag_value_description: "eonid 1"
+    eonid_2: 
+      tag_value_description: "eonid 2"

@@ -1,0 +1,4 @@
+org_policies:
+  clouddeploy.disableServiceLabelGeneration:
+    rules:
+      - enforce: true

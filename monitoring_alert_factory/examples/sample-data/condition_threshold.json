@@ -1,0 +1,81 @@
+{
+    "displayName": "threshold-test",
+    "documentation": {
+      "content": "hello",
+      "mimeType": "text/markdown"
+    },
+    "userLabels": {
+      "faf": "aedadf"
+    },
+    "conditions": [
+      {
+        "displayName": "condition threshold with aggregations and denominator aggregations",
+        "conditionThreshold": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "aggregations": [
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_MEAN",
+              "perSeriesAligner": "ALIGN_MEAN"
+            }
+          ],
+          "denominatorFilter": "metric.type=\"appengine.googleapis.com/http/server/response_count\" AND project=\"a-gcp-project\" AND resource.type=\"gae_app\"",
+          "denominatorAggregations": [
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_SUM",
+              "groupByFields": [
+                "project",
+                "resource.label.module_id",
+                "resource.label.version_id"
+                ],
+              "perSeriesAligner": "ALIGN_DELTA"
+            }
+          ],
+          "comparison": "COMPARISON_GT",
+          "duration": "60s",
+          "trigger": {
+            "count": 1
+          },
+          "thresholdValue": 0.75
+        }
+      },
+      {
+        "displayName": "condition with forecast option",
+        "conditionThreshold": {
+          "filter": "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\"",
+          "aggregations": [
+            {
+              "alignmentPeriod": "300s",
+              "crossSeriesReducer": "REDUCE_SUM",
+              "perSeriesAligner": "ALIGN_MEAN"
+            }
+          ],
+          "comparison": "COMPARISON_GT",
+          "duration": "60s",
+          "trigger": {
+            "count": 1,
+            "percent": 20
+          },
+          "thresholdValue": 5.0,
+          "evaluationMissingData": "EVALUATION_MISSING_DATA_NO_OP"
+        }
+      }
+    ],
+    "alertStrategy": {
+      "autoClose": "604800s",
+      "notificationRateLimit": {
+        "period": "20s"
+      },
+      "notificationChannelStrategy": [
+        {
+          "notificationChannelNames": ["projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]"],
+          "renotifyInterval": "20s"
+        }
+      ]
+    },
+    "combiner": "OR",
+    "enabled": true,
+    "project": "poc-and-training",
+    "notificationChannels": ["test1","test2"]
+}

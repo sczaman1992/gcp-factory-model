@@ -1,0 +1,21 @@
+notification_channels_details:
+  service_project_id: "svc-prj-subnet-02"
+  notification_channels:
+    email_notification_channel2:
+      type: "email"
+      labels:
+        email_address: "a1@abc.com"
+      enabled: true
+      description: "email_notification_channel"
+      user_labels:
+        key1: "value1"
+        key2: "value2"
+    pubsub_notification_channel2:
+      type: "pubsub"
+      labels:
+        topic_name: "mytopic"
+      enabled: true
+      description: "pubsub_notification_channel"
+      user_labels:
+        key1: "topic value1"
+        key2: "topic value2"

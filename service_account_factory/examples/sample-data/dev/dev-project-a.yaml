@@ -1,0 +1,25 @@
+service_account_details:
+  project_id: "dev-project-a"
+  folder_id: "dev"
+  organization_id: "76544333"
+  service_accounts:
+    my-web:
+      project_roles:
+        - roles/pubsub.admin
+        - roles/compute.admin
+      folder_roles:
+        - roles/resourcemanager.folderAdmin
+      organization_roles:
+        - roles/orgpolicy.policyAdmin
+      subnet_roles:
+        - "roles/compute.networkUser"
+    dev-admin:
+      project_roles:
+        - roles/compute.admin
+        - roles/pubsub.admin
+      folder_roles:
+        - roles/resourcemanager.folderAdmin
+      organization_roles:
+        - roles/orgpolicy.policyAdmin
+      subnet_roles:
+        - "roles/compute.networkUser"

@@ -1,0 +1,49 @@
+network_policy:
+  policy_name: "regional-firewall-policy"
+  project: "bootstrap-wip-sa"
+  policy_description: "org firewall policy"
+  region: "us-west1"
+  association:
+    r-bootstrap-wip-sa-dev:
+      policy_association_target: "vpcdev"
+    r-bootstrap-wip-sa-prod:
+      policy_association_target: "vpcprod"
+  custom_rules:
+    r-orgfp-allow-ingress-inbound:
+      policy_rule_description: "allow inbound"
+      policy_rule_priority: 1000
+      policy_rule_enable_logging: true
+      policy_rule_action: "allow"
+      policy_rule_direction: "INGRESS"
+      policy_rule_disabled: false
+      target_secure_tags:
+        name: "tagValues/tag1"
+      match:
+        layer4_configs:
+          ip_protocol: "tcp"
+          ports: ["22","443"]
+        src_secure_tags:
+          name: "tagValues/tag3"
+        dest_ip_ranges:
+          - "192.0.0.0"
+          - "221.0.0.0"
+
+    r-orgfp-deny-egress-inbound:
+      policy_rule_description: "rule-test-outbound"
+      policy_rule_priority: "2000"
+      policy_rule_enable_logging: true
+      policy_rule_action: "deny"
+      policy_rule_direction: "EGRESS"
+      policy_rule_disabled: false
+      target_secure_tags:
+        name: "tagValues/tag1"
+      match:
+        layer4_configs:
+          ip_protocol: "udp"
+          ports: ["66","47"]
+        dest_ip_ranges:
+          - "122.0.0.0"
+          - "88.0.0.0"
+        src_ip_ranges:
+          - "143.0.0.0"
+          - "129.0.0.0"
